@@ -39,12 +39,30 @@ def main():
             float_arr[j] = float(score_arr[j])
 
         res = [x for _,x in sorted(zip(float_arr,names))]
-        print(float_arr)
-        print(res)
+        float_arr.sort()
 
-       # for n in reversed(res):
-        #    print(n[:-1])
+        # arrange names that have equal values in alphabetical order
+        m = 0
+        while m < (len(res) - 1):
+            if(float_arr[m] == float_arr[m + 1]):
+                start_index = m
+                end_index = m + 1
+                while float_arr[start_index] == float_arr[end_index]:
+                    if(end_index == len(res) - 1):
+                        break
+                    end_index += 1
+                # sort the list of names between the indexes
+                m = end_index
+                if(end_index != len(res) -1):
+                    res[start_index:end_index]= sorted(res[start_index:end_index], reverse=True)
+                else:
+                    res[start_index:]= sorted(res[start_index:], reverse=True)
+            m += 1
+        
+        for n in reversed(res):
+            print(n[:-1])
+        print('==============================')
         
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
